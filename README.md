@@ -76,8 +76,8 @@ This repository is a [Node.js](https://nodejs.org) web application that specifie
 Optionally after deployment, to push Ghost upgrades or work with source code, clone this repo (or a fork) and connect it with the Heroku app:
 
 ```bash
-git clone https://github.com/cobyism/ghost-on-heroku
-cd ghost-on-heroku
+git clone https://github.com/bmann/fission-ghost
+cd fission-ghost
 
 heroku git:remote -a YOURAPPNAME
 heroku info
@@ -101,7 +101,7 @@ See more about [deploying to Heroku with git](https://devcenter.heroku.com/artic
 
 ### Upgrading Ghost
 
-On each deployment, the Heroku Node/npm build process will **auto-upgrade Ghost to the newest 1.x version**. To prevent this behavior, use npm 5+ (or yarn) to create a lockfile.
+On each deployment, the Heroku Node/npm build process will **auto-upgrade Ghost to the newest 2.x version**. To prevent this behavior, use npm 5+ (or yarn) to create a lockfile.
 
 ```bash
 npm install
@@ -148,7 +148,7 @@ release: knex-migrator migrate --mgpath node_modules/ghost
 
 ## Problems?
 
-If you have problems using your instance of Ghost, you should check the [official documentation](http://support.ghost.org/) or open an issue on [the official issue tracker](https://github.com/TryGhost/Ghost/issues). If you discover an issue with the deployment process provided by *this repository*, then [open an issue here](https://github.com/cobyism/ghost-on-heroku).
+If you have problems using your instance of Ghost, you should check the [official documentation](http://support.ghost.org/) or open an issue on [the official issue tracker](https://github.com/TryGhost/Ghost/issues). If you discover an issue with the deployment process provided by *this repository*, then [open an issue here](https://github.com/bmann/fission-ghost).
 
 ## License
 
