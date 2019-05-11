@@ -2,6 +2,12 @@
 
 Ghost is a free, open, simple blogging platform. Visit the project's website at <http://ghost.org>, or read the docs on <http://support.ghost.org>.
 
+## Ghost v2.x
+
+- Edited the package.json to include the newest 2.x Ghost release and the newest Casper and S3 adapter modules
+
+---
+
 ## Ghost version 1.X
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
