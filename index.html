@@ -7,8 +7,8 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ghost on Heroku • One-button deploy for free</title>
-  <meta name="description" content="Want to deploy a Ghost blog on Heroku? Use this button to deploy Ghost on Heroku for free.">
+  <title>Ghost on Heroku • One-button deploy</title>
+  <meta name="description" content="Want to deploy a Ghost blog on Heroku? Use this button to deploy Ghost on Heroku.">
   <meta name="keywords" content="ghost, blog, heroku, deploy">
   <link href='http://fonts.googleapis.com/css?family=Lora:400italic,700,400|Open+Sans:700,400' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="public/gridism.css">
@@ -24,14 +24,14 @@
     <div class="grid">
       <div class="unit whole align-center">
 
-        <img src="public/icons.png" alt="Deploy Ghost on Heroku for free" width="150" class="icons">
+        <img src="public/icons.png" alt="Deploy Ghost on Heroku" width="150" class="icons">
 
         <h1>Your very own <a href="https://ghost.org">Ghost</a>&nbsp;blog.<br>Hosted&nbsp;on&nbsp;<a href="https://heroku.com">Heroku</a>. <em>For&nbsp;free</em>.</h1>
 
         <p class="lead">Click the button below to deploy a <a href="https://ghost.org">Ghost</a> blog for free on your <a href="https://heroku.com">Heroku</a>&nbsp;account. You&nbsp;should be up and running in less&nbsp;than&nbsp;two&nbsp;minutes.</p>
 
         <p class="overlap">
-          <a href="https://heroku.com/deploy?template=https://github.com/cobyism/ghost-on-heroku" class="btn">
+          <a href="https://heroku.com/deploy?template=https://github.com/bmann/fission-ghost" class="btn">
             :sparkles: <strong>Deploy Ghost</strong> to Heroku :sparkles:
           </a>
         </p>
@@ -66,11 +66,11 @@
     <div class="grid">
       <div class="unit whole align-center">
         <p>
-          Built with :sparkling_heart: by <a href="http://cobyism.com">@cobyism</a>.
+          Built with :sparkling_heart: by <a href="https://blog.fission.codes/ghost2-blog-on-heroku/">@bmann</a>.
         </p>
         <a class="twitter-share-button" href="https://twitter.com/share"
           data-text="I just deployed a @TryGhost blog to @Heroku for free using this:"
-          data-via="cobyism"
+          data-via="bmann"
           data-count="horizontal"
           data-size="large">
           Tweet</a>
@@ -80,7 +80,7 @@
       </div>
     </div>
   </footer>
-
+  {% comment %}
   {% if site.safe %}
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -91,6 +91,7 @@
       ga('send', 'pageview');
     </script>
   {% endif %}
+  {% endcomment %}
 
 </body>
 </html>
