@@ -2,15 +2,14 @@
 
 Ghost is a free, open, simple blogging platform. Visit the project's website at <http://ghost.org>, or read the docs on <http://support.ghost.org>.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Ghost v2.x
 
-- Edited the package.json to include the newest 2.x Ghost release and the newest Casper and S3 adapter modules
+This has been forked from the [Ghost 1.x on Heroky by cobyism](https://github.com/cobyism/ghost-on-heroku). The Deploy button should "just work" -- you'll need to add S3 credentials after the fact if you want file uploads to work.
 
----
-
-## Ghost version 1.X
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+- Edited the `package.json` to include the newest 2.x Ghost release and the newest Casper and S3 adapter modules
+- Removed `package-lock.json` so that newest packages are used automatically
 
 ### Things you should know
 
