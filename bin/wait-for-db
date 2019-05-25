@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var mysql      = require('mysql');
+var mysql      = require('../node_modules/mysql');
 var envValues  = require('./common/env-values');
 
 console.error(`Awaiting MySQL database…`);
