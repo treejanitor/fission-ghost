@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 // Ghost Configuration for Heroku
 
-var fs = require('fs');
-var path = require('path');
-var url = require('url');
+let fs = require('fs');
+let path = require('path');
+let url = require('url');
 
-var envValues = require('./common/env-values');
-var appRoot = path.join(__dirname, '..');
+let envValues = require('./common/env-values');
+let appRoot = path.join(__dirname, '..');
 
 function createConfig() {
-  var fileStorage, storage;
+  let fileStorage, storage;
 
   if (!!process.env.S3_ACCESS_KEY_ID) {
-    fileStorage = true
+    fileStorage = true;
     storage = {
       active: 's3',
       's3': {
@@ -24,19 +24,38 @@ function createConfig() {
       }
     }
   } else if (!!process.env.BUCKETEER_AWS_ACCESS_KEY_ID) {
-    fileStorage = true
+    fileStorage = true;
     storage = {
       active: 's3',
       's3': {
-        accessKeyId:     process.env.BUCKETEER_AWS_ACCESS_KEY_ID,
+        accessKeyId: process.env.BUCKETEER_AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.BUCKETEER_AWS_SECRET_ACCESS_KEY,
-        bucket:          process.env.BUCKETEER_BUCKET_NAME,
-        region:          process.env.S3_BUCKET_REGION,
-        assetHost:       process.env.S3_ASSET_HOST_URL
+        bucket: process.env.BUCKETEER_BUCKET_NAME,
+        region: process.env.S3_BUCKET_REGION,
+        assetHost: process.env.S3_ASSET_HOST_URL
+      }
+    }
+  } else if (!!process.env.GOOGLE_PRIVATE_KEY_ID) {
+    fileStorage = true;
+    storage = {
+      active: 'ghost-google-drive',
+      'ghost-google-drive': {
+        key: {
+          type: 'service_account',
+          project_id: 'kingpelican',
+          private_key_id: '0e40fd57f807e57fbc8bf377d7885c8a12d5128a',
+          private_key: '-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCuyS3gvHhuRLVk\nnGCHI3W4MjzONBQxxQpMPYK7yYzt8IsCTsoj9juVS3CbgS2gOCatmE8OIC4x4K76\nhcfbM7OWyNNH3hI16pqHmUi9dSxQ5r7Qhqtg2SKiL/0UcDfzZ4fPZnpn+S+Q3HGP\nO8Kdkul3P2ZD+pFe51bKKudKLExeuLQgDC2syWctVosJCeV0xVKV/Jmb7rPfay/v\n1E2afZ+boD2zyU+u79lccxsFGwyjCWFqc1LVPahWv2rO5orRoqu3vw0BxVGVIOua\nqOEr2p2Kiqyh2WK78dXOk4syvKMMyZo+3U7lWV75t9CPgSpBwVAP3TSGmF3CvHat\nzUSkMaM3AgMBAAECggEAVRZa3yzg880/ANufoioBBMpwD3IK4q+pc7P+EKztjmer\nRFRW02rrVqKDDzCzpWuwaJHc6mOAGYfnps25nVxt8NmTAUl6VAUBdUGJx7FjAX9T\nJPBqPZt24L271ldK5ZNg6fZZYIROQ5cNMU1GUK9UOFkEz9MLMcgs1/5K2jD2fKVe\nbygxq1HBQm+bBZHiLpSGBGoDcgrsH+URci79zkxjurI+YOjhy9xQ1F0WFcXT7LWv\n6LgFaj8YUT4q/OMI0sf2HXo9y8Jxy8fDIjNgj8zXuq+/f/JOPe5oK+m6A1URdFk4\na1Zkj9/IhSeuHryTauHt2Yag2JqUqinoXHwGFyVOAQKBgQDwGOX+WoZU1ej+Ao76\nTLgeRmVGfjwD3/OX0LFnFusLtSvcBRESk8MQOSlfNvZT1SeKnEwt+18DVidt5mbv\ndtycEaF4hslKSIJwPJo+bq4gdWTtAJZ1OE1uvj2vI7bIgos73VMReb2lMolAPuQD\nHQefL4HOmpQx9DTr8ZN9A87YqQKBgQC6XNt1Q1eDKI93B6kTNXpsV++XMRjlk3xV\nbnmPfZXFZmgctuDJZKBb4GqEMQhmO3Irzx3JbDFN03p9VUGt7HwKNovFu26RU9w+\nbtLJOqB9Ba5lomcEwAKWnKUnccIoAlOUAmqHk6EtzHGu0a77LQcJf6WmYKBwEdCS\npNMNDrSo3wKBgC8hpBxvJsmGiEs8s1Z9MvN2fDD/XMah8s6NgBWtkQxmTyrMr9JG\nwVbw8acoQeipAi8aiXXJT5h3FBxlyzUczyev6lOfmeoEG97udpTk4zep89r2b5Kp\nL8IahD9aMmpf/fcNdl4K2OiR6BF9hwL5cuKTz9Z/z7GSr8TVUk+LLNKpAoGBAItg\noykCIlMPZKyK6CJbnqGk6qVSrOIV+akTJIryS68Etdyz0U4Nmfjc0AzpdvSuhObK\n0eYwqncgML3Ho4VmFia1QLezRDAgXdm7nJ2u4RRfyVxtp0pgKA9oPARSCflONB+/\n5thayvKrsmIipBFqTZcHBmZ2YccvK6Rg7Q8Y7nhVAoGBAN+mSUUE6lslYNxRDa8a\nRDIdJHhcH7Qwy7TU23xrWneeMDlNxrWaqTRO6sd2Ad5Q9h912BzDyYqaFy+sRDnq\nad4nnEgZvet9HwVQkITOYS6OQv0RugYY4IStj4Aad+EXPVCVscuSNSg0wPpHOPFb\nxqayRdL/FQmm5v8JthJ8JaqM\n-----END PRIVATE KEY-----\n',
+          client_email: 'kingpelican-ghost@kingpelican.iam.gserviceaccount.com',
+          client_id: '109035462130689433007',
+          auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+          token_uri: 'https://oauth2.googleapis.com/token',
+          auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+          client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/kingpelican-ghost%40kingpelican.iam.gserviceaccount.com'
+        }
       }
     }
   } else {
-    fileStorage = false
+    fileStorage = false;
     storage = {}
   }
 
@@ -59,8 +78,8 @@ function createConfig() {
     fileStorage: fileStorage,
     storage: storage,
     database: {
-      client: 'mysql',
-      connection: getMysqlConfig(envValues.mysqlDatabaseUrl),
+      client: 'postgres',
+      connection: getPostgresConfig(envValues.postgresDatabaseUrl),
       pool: { min: 0, max: 5 },
       debug: false
     },
@@ -76,27 +95,27 @@ function createConfig() {
   return config;
 }
 
-function getMysqlConfig(connectionUrl) {
+function getPostgresConfig(connectionUrl) {
   if (connectionUrl == null) {
     return {};
   }
 
-  var dbConfig = url.parse(connectionUrl);
+  let dbConfig = url.parse(connectionUrl);
   if (dbConfig == null) {
     return {};
   }
 
-  var dbAuth = dbConfig.auth ? dbConfig.auth.split(':') : [];
-  var dbUser = dbAuth[0];
-  var dbPassword = dbAuth[1];
+  let dbAuth = dbConfig.auth ? dbConfig.auth.split(':') : [];
+  let dbUser = dbAuth[0];
+  let dbPassword = dbAuth[1];
 
   if (dbConfig.pathname == null) {
-    var dbName = 'ghost';
+    let dbName = 'ghost';
   } else {
-    var dbName = dbConfig.pathname.split('/')[1];
+    let dbName = dbConfig.pathname.split('/')[1];
   }
 
-  var dbConnection = {
+  let dbConnection = {
     host: dbConfig.hostname,
     port: dbConfig.port || '3306',
     user: dbUser,
@@ -106,5 +125,5 @@ function getMysqlConfig(connectionUrl) {
   return dbConnection;
 }
 
-var configContents = JSON.stringify(createConfig(), null, 2);
+let configContents = JSON.stringify(createConfig(), null, 2);
 fs.writeFileSync(path.join(appRoot, 'config.production.json'), configContents);

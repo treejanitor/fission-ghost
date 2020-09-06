@@ -7,7 +7,7 @@ console.error(`Awaiting MySQL database…`);
 pingDatabaseUntilConnected();
 
 function pingDatabaseUntilConnected() {
-  var connection = mysql.createConnection(envValues.mysqlDatabaseUrl);
+  var connection = mysql.createConnection(envValues.postgresDatabaseUrl);
   connection.query('SELECT 1', function (error, results, fields) {
     if (error) {
       console.error(`Database not yet available: ${error.message}`);
