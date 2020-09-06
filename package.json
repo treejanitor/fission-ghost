@@ -10,6 +10,7 @@
   "dependencies": {
     "casper": "github:tryghost/Casper#2.10.0",
     "ghost": "^2.22.0",
+    "ghost-google-drive": "^2.0.3",
     "ghost-storage-adapter-s3": "^2.8.0",
     "mysql": "^2.14.1",
     "pg": "^8.3.3"
