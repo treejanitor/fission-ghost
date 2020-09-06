@@ -117,7 +117,7 @@ function getPostgresConfig(connectionUrl) {
 
   let dbConnection = {
     host: dbConfig.hostname,
-    port: dbConfig.port || '3306',
+    port: dbConfig.port || '5432',
     user: dbUser,
     password: dbPassword,
     database: dbName
