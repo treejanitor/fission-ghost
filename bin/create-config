@@ -79,7 +79,14 @@ function createConfig() {
     storage: storage,
     database: {
       client: 'postgres',
-      connection: getPostgresConfig(envValues.postgresDatabaseUrl),
+      connection: {
+        host: process.env.DATABASE_HOST || dbConfig.hostname,
+        port: process.env.DATABASE_PORT || dbConfig.port || '5432',
+        user: process.env.DATABASE_USER || dbUser,
+        password: process.env.DATABASE_PASSWORD || dbPassword,
+        database: process.env.DATABASE_NAME || dbName
+        //getPostgresConfig(envValues.postgresDatabaseUrl)
+      },
       pool: { min: 0, max: 5 },
       debug: false
     },
@@ -91,7 +98,6 @@ function createConfig() {
       contentPath: path.join(appRoot, '/content/')
     }
   };
-
   return config;
 }
 
